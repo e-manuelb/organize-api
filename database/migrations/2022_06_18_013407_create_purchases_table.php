@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('wallet_id');
             $table->foreignId('user_id');
             $table->boolean('is_installments');
+            $table->integer('installments_number')->nullable();
             $table->timestamps();
         });
     }

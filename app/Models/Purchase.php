@@ -19,6 +19,7 @@ class Purchase extends Model
         'wallet_id',
         'value',
         'is_installments',
+        'installments_number',
         'user_id'
     ];
 

@@ -12,8 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('purchase_id');
             $table->float('value');
-            $table->integer('installments_number');
-            $table->date('first_installment');
+            $table->integer('installment_number');
             $table->timestamps();
         });
     }

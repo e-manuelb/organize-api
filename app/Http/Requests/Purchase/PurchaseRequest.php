@@ -21,6 +21,7 @@ class PurchaseRequest extends FormRequest
             'wallet_id' => 'required',
             'value' => 'required',
             'is_installments' => 'required',
+            'installments_number' => 'integer',
             'user_id' => 'required'
         ];
     }
