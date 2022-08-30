@@ -11,7 +11,16 @@ class PurchaseRequest extends FormRequest
         return true;
     }
 
-    public function rules(): array
+    public function rules(): ?array
+    {
+        if ($this->isMethod('POST')) {
+            return $this->getCreateValidation();
+        }
+
+        return [];
+    }
+
+    protected function getCreateValidation(): array
     {
         return [
             'description' => 'max:255',

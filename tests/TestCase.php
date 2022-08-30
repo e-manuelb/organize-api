@@ -2,10 +2,8 @@
 
 namespace Tests;
 
-use App\Models\Origin;
 use App\Models\RoleTypes;
 use App\Models\User;
-use App\Models\Wallet;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase

@@ -33,6 +33,23 @@ class CreatePurchaseControllerTest extends TestCase
 
         $response = $this->actingAs($user)->post('/api/purchase/create', $purchase);
 
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'description',
+                'store_name',
+                'store_id',
+                'date',
+                'origin_id',
+                'wallet_id',
+                'value',
+                'is_installments',
+                'installments_number',
+                'user_id',
+                'updated_at',
+                'created_at'
+            ]
+        ]);
         $response->assertStatus(201);
 
     }
@@ -60,6 +77,22 @@ class CreatePurchaseControllerTest extends TestCase
         ];
 
         $response = $this->actingAs($user)->post('/api/purchase/create', $purchase);
+
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'description',
+                'store_name',
+                'store_id',
+                'date',
+                'origin_id',
+                'wallet_id',
+                'value',
+                'user_id',
+                'updated_at',
+                'created_at'
+            ]
+        ]);
 
         $response->assertStatus(201);
 

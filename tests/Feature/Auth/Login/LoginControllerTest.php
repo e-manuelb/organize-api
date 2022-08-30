@@ -18,6 +18,12 @@ class LoginControllerTest extends TestCase
             'password' => 'password'
         ]);
 
+        $response->assertJsonStructure([
+            'data' => [
+                'access_token'
+            ]
+        ]);
+
         $response->assertStatus(200);
     }
 }
