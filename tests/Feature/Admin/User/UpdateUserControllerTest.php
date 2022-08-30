@@ -1,0 +1,45 @@
+<?php
+
+namespace Tests\Feature\Admin\User;
+
+use Tests\TestCase;
+
+class UpdateUserControllerTest extends TestCase
+{
+    public function testUpdateUser()
+    {
+        $admin = $this->createAdmin();
+        $user = $this->createUser();
+
+        $payload = [
+            'name' => 'Fake name',
+            'email' => 'fake@email.com'
+        ];
+
+        $response = $this->actingAs($admin)->put("/api/admin/user/update/$user->id", $payload);
+
+        $response->assertJson([
+            'data' => [
+                'name' => 'Fake name',
+                'email' => 'fake@email.com'
+            ]
+        ]);
+
+        $response->assertStatus(200);
+    }
+
+    public function testUpdateUserWhenIsNotAdmin()
+    {
+        $admin = $this->createAdmin();
+        $user = $this->createUser();
+
+        $payload = [
+            'name' => 'Fake name',
+            'email' => 'fake@email.com'
+        ];
+
+        $response = $this->put("/api/admin/user/update/$user->id", $payload);
+
+        $response->assertStatus(401);
+    }
+}

@@ -23,15 +23,15 @@ class PurchaseRequest extends FormRequest
     protected function getCreateValidation(): array
     {
         return [
-            'description' => 'max:255',
-            'store_name' => 'max:255',
-            'date' => 'date',
-            'origin_id' => 'required',
-            'wallet_id' => 'required',
-            'value' => 'required',
-            'is_installments' => 'required',
-            'installments_number' => 'integer',
-            'user_id' => 'required'
+            'description' => ['max:255'],
+            'store_name' => ['max:255'],
+            'date' => ['date'],
+            'origin_id' => ['required'],
+            'wallet_id' => ['required'],
+            'value' => ['required'],
+            'is_installments' => ['required'],
+            'installments_number' => ['integer'],
+            'user_id' => ['required']
         ];
     }
 

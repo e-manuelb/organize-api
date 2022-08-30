@@ -195,32 +195,43 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        /*
-         * Auth Service Providers...
+        /**
+         * Admin Domain Service Providers...
          */
-        App\Providers\Auth\RouteServiceProvider::class,
 
         /*
          * User Service Providers...
          */
-        App\Providers\User\RouteServiceProvider::class,
+        \App\Providers\Admin\User\RouteServiceProvider::class,
+
+        /**
+         * User Domain Service Providers...
+         */
+
+        /*
+         * Auth Service Providers...
+         */
+        \App\Providers\User\Auth\RouteServiceProvider::class,
+
+        /*
+         * User Service Providers...
+         */
+        \App\Providers\User\User\RouteServiceProvider::class,
 
         /*
          * Wallet Service Providers...
          */
-        App\Providers\Wallet\RouteServiceProvider::class,
+        \App\Providers\User\Wallet\RouteServiceProvider::class,
 
         /*
          * Origin Service Providers...
          */
-        App\Providers\Origin\RouteServiceProvider::class,
+        \App\Providers\User\Origin\RouteServiceProvider::class,
 
         /*
          * Purchase Service Providers...
          */
-        App\Providers\Purchase\RouteServiceProvider::class,
-
-
+        \App\Providers\User\Purchase\RouteServiceProvider::class,
 
     ],
 
