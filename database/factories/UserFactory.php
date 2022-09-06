@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\RoleTypes;
+use App\Models\Roles;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +17,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => Hash::make('password'),
-            'role_id' => RoleTypes::USER
+            'role_id' => Roles::USER
         ];
     }
 }

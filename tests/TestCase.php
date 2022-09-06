@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use App\Models\RoleTypes;
+use App\Models\Roles;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -14,14 +14,14 @@ abstract class TestCase extends BaseTestCase
     public function createUser(): User
     {
         return User::factory()->create([
-            'role_id' => RoleTypes::USER
+            'role_id' => Roles::USER
         ]);
     }
 
     public function createAdmin(): User
     {
         return User::factory()->create([
-            'role_id' => RoleTypes::ADMIN
+            'role_id' => Roles::ADMIN
         ]);
     }
 }

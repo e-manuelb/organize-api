@@ -202,7 +202,7 @@ return [
         /*
          * User Service Providers...
          */
-        \App\Providers\Admin\User\RouteServiceProvider::class,
+        App\Domains\Admin\Subdomains\User\Providers\RouteServiceProvider::class,
 
         /**
          * User Domain Service Providers...
@@ -211,27 +211,27 @@ return [
         /*
          * Auth Service Providers...
          */
-        \App\Providers\User\Auth\RouteServiceProvider::class,
+        App\Domains\User\Subdomains\Auth\Providers\RouteServiceProvider::class,
 
         /*
          * User Service Providers...
          */
-        \App\Providers\User\User\RouteServiceProvider::class,
+        App\Domains\User\Providers\RouteServiceProvider::class,
 
         /*
          * Wallet Service Providers...
          */
-        \App\Providers\User\Wallet\RouteServiceProvider::class,
+        App\Domains\User\Subdomains\Wallet\Providers\RouteServiceProvider::class,
 
         /*
          * Origin Service Providers...
          */
-        \App\Providers\User\Origin\RouteServiceProvider::class,
+        App\Domains\User\Subdomains\Origin\Providers\RouteServiceProvider::class,
 
         /*
          * Purchase Service Providers...
          */
-        \App\Providers\User\Purchase\RouteServiceProvider::class,
+        App\Domains\User\Subdomains\Purchase\Providers\RouteServiceProvider::class,
 
     ],
 

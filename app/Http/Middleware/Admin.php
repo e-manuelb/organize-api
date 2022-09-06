@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\RoleTypes;
+use App\Models\Roles;
 use Closure;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +17,7 @@ class Admin
             abort(Response::HTTP_UNAUTHORIZED, 'Unauthorized.');
         }
 
-        if ($user->role_id != RoleTypes::ADMIN) {
+        if ($user->role_id != Roles::ADMIN) {
             abort(Response::HTTP_UNAUTHORIZED, 'Unauthorized.');
         }
 
