@@ -13,7 +13,8 @@ class UpdateUserControllerTest extends TestCase
 
         $payload = [
             'name' => 'Fake name',
-            'email' => 'fake@email.com'
+            'email' => 'fake@email.com',
+            'password' => '123456789'
         ];
 
         $response = $this->actingAs($admin)->put("/api/admin/user/update/$user->id", $payload);
@@ -30,7 +31,6 @@ class UpdateUserControllerTest extends TestCase
 
     public function testUpdateUserWhenIsNotAdmin()
     {
-        $admin = $this->createAdmin();
         $user = $this->createUser();
 
         $payload = [

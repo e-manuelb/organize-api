@@ -2,12 +2,12 @@
 
 namespace App\Domains\User\Subdomains\Purchase\Services\Installments;
 
-use App\Domains\User\Subdomains\Purchase\Services\Interfaces\CreateInstallmentInterface;
+use App\Domains\User\Subdomains\Purchase\Services\Interfaces\CreateInstallmentServiceInterface;
 use App\Domains\User\Subdomains\Purchase\Models\Installment;
 use App\Domains\User\Subdomains\Purchase\Models\Purchase;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class CreateInstallmentService implements CreateInstallmentInterface
+class CreateInstallmentService implements CreateInstallmentServiceInterface
 {
     use AsAction;
 

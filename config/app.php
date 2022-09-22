@@ -182,6 +182,25 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        /**
+         * Repository Service Providers
+         */
+
+        /**
+         * Domain ADMIN
+         */
+        App\Domains\Admin\Subdomains\User\Providers\RepositoryServiceProvider::class,
+
+        /**
+         * Domain USER
+         */
+
+        App\Domains\User\Providers\RepositoryServiceProvider::class,
+        App\Domains\User\Subdomains\Auth\Providers\RepositoryServiceProvider::class,
+        App\Domains\User\Subdomains\Origin\Providers\RepositoryServiceProvider::class,
+        App\Domains\User\Subdomains\Purchase\Providers\RepositoryServiceProvider::class,
+        App\Domains\User\Subdomains\Wallet\Providers\RepositoryServiceProvider::class,
+
         /*
          * Package Service Providers...
          */

@@ -2,17 +2,23 @@
 
 namespace App\Domains\Admin\Subdomains\User\Http\Controllers;
 
-use App\Domains\Admin\Subdomains\User\Http\Controllers\Interfaces\ListUsersInterface;
+use App\Domains\Admin\Subdomains\User\Http\Controllers\Interfaces\ListUsersControllerInterface;
 use App\Domains\Admin\Subdomains\User\Http\Resources\UserResource;
 use App\Domains\Admin\Subdomains\User\Models\User;
+use App\Domains\Admin\Subdomains\User\Services\ListUsersService;
 use App\Http\Controllers\Controller;
 
-class ListUsersController extends Controller implements ListUsersInterface
+class ListUsersController extends Controller implements ListUsersControllerInterface
 {
+    protected ListUsersService $listUsersService;
+
+    public function __construct(ListUsersService $listUsersService)
+    {
+        $this->listUsersService = $listUsersService;
+    }
+
     public function __invoke(): UserResource
     {
-        $users = (new User())->get();
-
-        return new UserResource($users);
+        return new UserResource($this->listUsersService->handle());
     }
 }

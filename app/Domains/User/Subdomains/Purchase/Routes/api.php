@@ -1,14 +1,14 @@
 <?php
 
-use App\Domains\User\Subdomains\Purchase\Http\Controllers\CreatePurchaseController;
-use App\Domains\User\Subdomains\Purchase\Http\Controllers\DeletePurchaseController;
-use App\Domains\User\Subdomains\Purchase\Http\Controllers\ListPurchasesController;
-use App\Domains\User\Subdomains\Purchase\Http\Controllers\UpdatePurchaseController;
+use App\Domains\User\Subdomains\Purchase\Http\Controllers\CreatePurchaseControllerController;
+use App\Domains\User\Subdomains\Purchase\Http\Controllers\DeletePurchaseControllerController;
+use App\Domains\User\Subdomains\Purchase\Http\Controllers\ListPurchasesControllerController;
+use App\Domains\User\Subdomains\Purchase\Http\Controllers\UpdatePurchaseControllerController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'authenticated'], function () {
-    Route::post('/create', CreatePurchaseController::class);
-    Route::get('/list', ListPurchasesController::class);
-    Route::put('/update/{id}', UpdatePurchaseController::class);
-    Route::delete('/delete/{id}', DeletePurchaseController::class);
+    Route::post('/create', CreatePurchaseControllerController::class);
+    Route::get('/list', ListPurchasesControllerController::class);
+    Route::put('/update/{id}', UpdatePurchaseControllerController::class);
+    Route::delete('/delete/{id}', DeletePurchaseControllerController::class);
 });
