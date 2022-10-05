@@ -2,14 +2,14 @@
 
 namespace App\Domains\User\Subdomains\Origin\Providers;
 
-use App\Domains\User\Subdomains\Origin\Repositories\CreateOriginRepository;
-use App\Domains\User\Subdomains\Origin\Repositories\Interfaces\CreateOriginRepositoryInterface;
+use App\Domains\User\Subdomains\Origin\Repositories\OriginRepository;
+use App\Domains\User\Subdomains\Origin\Repositories\Interfaces\OriginRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->bind(CreateOriginRepositoryInterface::class, CreateOriginRepository::class);
+        $this->app->bind(OriginRepositoryInterface::class, OriginRepository::class);
     }
 }

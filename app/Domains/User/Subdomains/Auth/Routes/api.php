@@ -1,6 +1,6 @@
 <?php
 
-use App\Domains\User\Subdomains\Auth\Http\Controllers\LoginControllerController;
+use App\Domains\User\Subdomains\Auth\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/login', LoginControllerController::class);
+Route::post('/login', [AuthController::class, 'login']);

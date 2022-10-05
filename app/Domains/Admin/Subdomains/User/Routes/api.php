@@ -1,14 +1,12 @@
 <?php
 
-use App\Domains\Admin\Subdomains\User\Http\Controllers\CreateUserController;
-use App\Domains\Admin\Subdomains\User\Http\Controllers\DeleteUserController;
-use App\Domains\Admin\Subdomains\User\Http\Controllers\ListUsersController;
-use App\Domains\Admin\Subdomains\User\Http\Controllers\UpdateUserController;
+use App\Domains\Admin\Subdomains\User\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'admin'], function () {
-    Route::get('/', ListUsersController::class);
-    Route::post('/create', CreateUserController::class);
-    Route::put('/update/{id}', UpdateUserController::class);
-    Route::delete('/delete/{id}', DeleteUserController::class);
+    Route::post('/', [UserController::class, 'create']);
+    Route::get('/', [UserController::class, 'index']);
+    Route::get('/{id}', [UserController::class, 'show']);
+    Route::put('/{id}', [UserController::class, 'update']);
+    Route::delete('/{id}', [UserController::class, 'delete']);
 });

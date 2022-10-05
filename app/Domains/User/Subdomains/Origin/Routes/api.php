@@ -1,8 +1,8 @@
 <?php
 
-use App\Domains\User\Subdomains\Origin\Http\Controllers\CreateOriginControllerController;
+use App\Domains\User\Subdomains\Origin\Http\Controllers\OriginController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'authenticated'], function () {
-    Route::post('/create', CreateOriginControllerController::class);
+    Route::post('/', [OriginController::class, 'create']);
 });

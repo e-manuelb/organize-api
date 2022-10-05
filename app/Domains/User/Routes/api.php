@@ -1,11 +1,10 @@
 <?php
 
-use App\Domains\User\Http\Controllers\CreateUserControllerController;
-use App\Domains\User\Http\Controllers\UpdateUserControllerController;
+use App\Domains\Admin\Subdomains\User\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/create', CreateUserControllerController::class);
+Route::post('/', [UserController::class, 'create']);
 
 Route::group(['middleware' => 'authenticated'], function () {
-    Route::put('/update/{id}', UpdateUserControllerController::class);
+    Route::put('/{id}', [UserController::class, 'update']);
 });

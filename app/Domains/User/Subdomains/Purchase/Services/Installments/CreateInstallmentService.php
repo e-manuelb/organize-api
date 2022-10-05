@@ -7,7 +7,7 @@ use App\Domains\User\Subdomains\Purchase\Models\Installment;
 use App\Domains\User\Subdomains\Purchase\Models\Purchase;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class CreateInstallmentService implements CreateInstallmentServiceInterface
+class CreateInstallmentService
 {
     use AsAction;
 
