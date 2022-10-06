@@ -6,14 +6,15 @@ use App\Domains\User\Subdomains\Auth\Models\User;
 use App\Domains\User\Subdomains\Auth\Repositories\Interfaces\AuthRepositoryInterface;
 use App\Domains\User\Subdomains\Auth\Services\Interfaces\AuthServiceInterface;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Support\Facades\Hash;
 
 class AuthService implements AuthServiceInterface
 {
-    protected AuthRepositoryInterface $loginRepository;
+    protected AuthRepositoryInterface $authRepository;
 
-    public function __construct(AuthRepositoryInterface $loginRepository)
+    public function __construct(AuthRepositoryInterface $authRepository)
     {
-        $this->loginRepository = $loginRepository;
+        $this->authRepository = $authRepository;
     }
 
     /**
@@ -21,21 +22,23 @@ class AuthService implements AuthServiceInterface
      */
     public function login(array $data): ?string
     {
-        $user = (new User())->where('email', '=', $data['email'])->first();
+        $user = (new User())->where('email', $data['email'])->first();
 
-        $this->checkCredentials();
+        $this->checkCredentials($data, $user);
 
-        return $this->loginRepository->login($user);
+        return $this->authRepository->createToken($user);
     }
 
     /**
      * @throws AuthenticationException
      */
-    protected function checkCredentials(): void
+    protected function checkCredentials(array $data, User $user): void
     {
-        $credentials = request(['email', 'password']);
+        if (!$user) {
+            throw new AuthenticationException('User is not registered in our database.');
+        }
 
-        if (!auth()->attempt($credentials)) {
+        if (!Hash::check($data['password'], $user->password)) {
             throw new AuthenticationException('The given data was invalid.');
         }
     }

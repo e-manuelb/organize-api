@@ -7,4 +7,6 @@ use App\Domains\User\Subdomains\Origin\Models\Origin;
 interface OriginServiceInterface
 {
     public function create(array $data): Origin;
+
+    public function getForUser(int $user_id): ?Origin;
 }

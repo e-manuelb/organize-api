@@ -8,4 +8,6 @@ use App\Domains\User\Subdomains\Origin\Http\Resources\OriginResource;
 interface OriginControllerInterface
 {
     public function create(OriginRequest $request): OriginResource;
+
+    public function getForUser(): OriginResource;
 }

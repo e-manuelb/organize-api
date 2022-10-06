@@ -6,5 +6,5 @@ use App\Domains\User\Subdomains\Auth\Models\User;
 
 interface AuthRepositoryInterface
 {
-    public function login(User $user): ?string;
+    public function createToken(User $user): ?string;
 }

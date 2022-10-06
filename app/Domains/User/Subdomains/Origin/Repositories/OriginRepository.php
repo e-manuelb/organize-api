@@ -18,4 +18,9 @@ class OriginRepository implements OriginRepositoryInterface
     {
         return $this->origin->create($data);
     }
+
+    public function getForUser(int $user_id): ?Origin
+    {
+        return $this->origin->where('user_id', $user_id)->first();
+    }
 }

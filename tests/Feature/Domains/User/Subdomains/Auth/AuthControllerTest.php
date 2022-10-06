@@ -2,8 +2,11 @@
 
 namespace Domains\User\Subdomains\Auth;
 
+use App\Models\Roles;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
@@ -12,7 +15,10 @@ class AuthControllerTest extends TestCase
 
     public function testLogin(): void
     {
-        $user = $this->createUser();
+        $user = User::factory()->create([
+            'role_id' => Roles::USER,
+            'password' => Hash::make('password')
+        ]);
 
         $response = $this->post('/api/auth/login', [
             'email' => $user->email,

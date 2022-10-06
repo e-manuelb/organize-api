@@ -3,7 +3,7 @@
 use App\Domains\User\Subdomains\Purchase\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'authenticated'], function () {
+Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/', [PurchaseController::class, 'create']);
     Route::get('/', [PurchaseController::class, 'index']);
     Route::get('/{id}', [PurchaseController::class, 'show']);

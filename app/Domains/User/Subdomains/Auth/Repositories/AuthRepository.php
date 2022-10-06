@@ -4,11 +4,20 @@ namespace App\Domains\User\Subdomains\Auth\Repositories;
 
 use App\Domains\User\Subdomains\Auth\Repositories\Interfaces\AuthRepositoryInterface;
 use App\Domains\User\Subdomains\Auth\Models\User;
+use Illuminate\Support\Str;
 
 class AuthRepository implements AuthRepositoryInterface
 {
-    public function login(User $user): string
+    public function createToken(User $user): string
     {
-        return $user->createToken('auth-token')->plainTextToken;
+        $token = Str::random(256);
+
+        $user
+            ->forceFill([
+                'api_token' => hash('sha256', $token),
+            ])
+            ->save();
+
+        return $token;
     }
 }

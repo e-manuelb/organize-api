@@ -14,7 +14,6 @@ class UserControllerTest extends TestCase
             'name' => 'Username',
             'email' => 'user@email.com',
             'password' => '12345678',
-            'role_id' => Roles::USER
         ]);
 
         $response->assertStatus(Response::HTTP_CREATED);

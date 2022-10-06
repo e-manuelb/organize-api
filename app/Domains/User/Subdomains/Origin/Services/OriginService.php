@@ -19,4 +19,9 @@ class OriginService implements OriginServiceInterface
     {
         return $this->originRepository->create($data);
     }
+
+    public function getForUser(int $user_id): ?Origin
+    {
+        return $this->originRepository->getForUser($user_id);
+    }
 }

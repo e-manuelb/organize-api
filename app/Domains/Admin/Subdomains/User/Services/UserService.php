@@ -7,6 +7,7 @@ use App\Domains\Admin\Subdomains\User\Services\Interfaces\UserServiceInterface;
 use App\Domains\Admin\Subdomains\User\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserService implements UserServiceInterface
 {
@@ -20,6 +21,7 @@ class UserService implements UserServiceInterface
     public function create(array $data): User
     {
         $data['password'] = Hash::make($data['password']);
+        $data['api_token'] = Str::random(60);
 
         return $this->userRepository->create($data);
     }

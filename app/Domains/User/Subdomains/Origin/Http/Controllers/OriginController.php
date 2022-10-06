@@ -22,4 +22,9 @@ class OriginController extends Controller implements OriginControllerInterface
     {
         return new OriginResource($this->originService->create($request->all()));
     }
+
+    public function getForUser(): OriginResource
+    {
+        return new OriginResource($this->originService->getForUser(auth()->id()));
+    }
 }
