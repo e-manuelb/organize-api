@@ -22,7 +22,8 @@ class AuthService implements AuthServiceInterface
      */
     public function login(array $data): ?string
     {
-        $user = (new User())->where('email', $data['email'])->first();
+        /** @var User $user */
+        $user = User::query()->where('email', $data['email'])->first();
 
         $this->checkCredentials($data, $user);
 
@@ -32,14 +33,14 @@ class AuthService implements AuthServiceInterface
     /**
      * @throws AuthenticationException
      */
-    protected function checkCredentials(array $data, User $user): void
+    protected function checkCredentials(array $data, ?User $user): void
     {
         if (!$user) {
-            throw new AuthenticationException('User is not registered in our database.');
+            throw new AuthenticationException('The provided user was not found in our database.');
         }
 
         if (!Hash::check($data['password'], $user->password)) {
-            throw new AuthenticationException('The given data was invalid.');
+            throw new AuthenticationException('The given data was invalid. Please try again.');
         }
     }
 }

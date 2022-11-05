@@ -13,6 +13,15 @@ class AuthControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('migrate', ['-vvv' => true]);
+        $this->artisan('passport:install', ['-vvv' => true]);
+        $this->artisan('db:seed',['-vvv' => true]);
+    }
+
     public function testLogin(): void
     {
         $user = User::factory()->create([

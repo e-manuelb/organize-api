@@ -10,14 +10,6 @@ class AuthRepository implements AuthRepositoryInterface
 {
     public function createToken(User $user): string
     {
-        $token = Str::random(256);
-
-        $user
-            ->forceFill([
-                'api_token' => hash('sha256', $token),
-            ])
-            ->save();
-
-        return $token;
+        return $user->createToken('API Token')->accessToken;
     }
 }

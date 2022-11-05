@@ -23,7 +23,7 @@ class AuthController extends Controller implements AuthControllerInterface
     {
         try {
             return new LoginResource([
-                'access_token' => $this->authService->login($request->all())
+                'access_token' => $this->authService->login($request->only('email', 'password')),
             ]);
         } catch (AuthenticationException $e) {
             abort(Response::HTTP_UNPROCESSABLE_ENTITY, 'The given data was invalid.');
