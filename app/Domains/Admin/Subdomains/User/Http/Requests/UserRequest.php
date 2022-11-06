@@ -17,15 +17,34 @@ class UserRequest extends FormRequest
             return $this->getCreateValidation();
         }
 
+        if ($this->isMethod('PUT')) {
+            return $this->getUpdateValidation();
+        }
+
         return [];
     }
 
     protected function getCreateValidation(): array
     {
         return [
-            'name' => ['required', 'max:255'],
-            'email' => ['required', 'max:255', 'unique:users', 'email'],
-            'password' => ['required', 'min:8', 'max:255']
+            'first_name' => ['required', 'max:256', 'string'],
+            'middle_name' => ['nullable', 'max:256', 'string'],
+            'last_name' => ['required', 'max:256', 'string'],
+            'email' => ['required', 'max:256', 'unique:users', 'email'],
+            'password' => ['required', 'min:8', 'max:256', 'string'],
+            'role_id' => ['nullable', 'integer']
+        ];
+    }
+
+    protected function getUpdateValidation(): array
+    {
+        return [
+            'first_name' => ['nullable', 'max:256', 'string'],
+            'middle_name' => ['nullable', 'max:256', 'string'],
+            'last_name' => ['nullable', 'max:256', 'string'],
+            'email' => ['nullable', 'max:256', 'unique:users', 'email'],
+            'password' => ['nullable', 'min:8', 'max:256', 'string'],
+            'role_id' => ['nullable', 'integer']
         ];
     }
 }

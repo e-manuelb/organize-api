@@ -11,7 +11,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->routes(function () {
             Route::middleware('api')
-                ->prefix('api/admin/user')
+                ->prefix('api/admin/users')
                 ->group(base_path('app/Domains/Admin/Subdomains/User/Routes/api.php'));
         });
     }

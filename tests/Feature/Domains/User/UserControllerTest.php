@@ -11,7 +11,8 @@ class UserControllerTest extends TestCase
     public function testCreateUser(): void
     {
         $response = $this->post('/api/user/', [
-            'name' => 'Username',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
             'email' => 'user@email.com',
             'password' => '12345678',
         ]);
@@ -24,7 +25,8 @@ class UserControllerTest extends TestCase
         $user = $this->createUser();
 
         $payload = [
-            'name' => 'Fake name',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
             'email' => 'fake@email.com'
         ];
 
@@ -32,8 +34,9 @@ class UserControllerTest extends TestCase
 
         $response->assertJson([
             'data' => [
-                'name' => 'Fake name',
-                'email' => 'fake@email.com'
+                'first_name' => $payload['first_name'],
+                'last_name' => $payload['last_name'],
+                'email' => $payload['email']
             ]
         ]);
 

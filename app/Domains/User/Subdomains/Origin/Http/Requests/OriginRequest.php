@@ -14,8 +14,8 @@ class OriginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:255'],
-            'user_id' => ['required']
+            'name' => ['required', 'max:256'],
+            'user_id' => ['required', 'integer']
         ];
     }
 

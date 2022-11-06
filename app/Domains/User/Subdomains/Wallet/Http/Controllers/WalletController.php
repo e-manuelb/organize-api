@@ -20,7 +20,7 @@ class WalletController extends Controller implements WalletControllerInterface
 
     public function __invoke(WalletRequest $request): WalletResource
     {
-        return new WalletResource($this->walletService->create($request->all()));
+        return new WalletResource($this->walletService->create($request->validated()));
     }
 
 }

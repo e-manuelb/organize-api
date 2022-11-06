@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('origins', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 256);
             $table->foreignId('user_id');
             $table->timestamps();
         });

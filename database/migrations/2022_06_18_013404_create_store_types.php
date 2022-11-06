@@ -10,7 +10,7 @@ return new class extends Migration {
     {
         Schema::create('store_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 256);
             $table->timestamps();
         });
 

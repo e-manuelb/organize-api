@@ -17,21 +17,42 @@ class PurchaseRequest extends FormRequest
             return $this->getCreateValidation();
         }
 
+        if ($this->isMethod('PUT')) {
+            return $this->getUpdateValidation();
+        }
+
         return [];
     }
 
     protected function getCreateValidation(): array
     {
         return [
-            'description' => ['max:255'],
-            'store_name' => ['max:255'],
-            'date' => ['date'],
-            'origin_id' => ['required'],
-            'wallet_id' => ['required'],
+            'description' => ['nullable', 'max:256', 'string'],
+            'store_name' => ['nullable', 'max:256', 'string'],
+            'store_id' => ['nullable', 'integer'],
+            'date' => ['nullable', 'date'],
+            'origin_id' => ['required', 'integer'],
+            'wallet_id' => ['required', 'integer'],
+            'user_id' => ['required', ' integer'],
             'value' => ['required'],
             'is_installments' => ['required'],
-            'installments_number' => ['integer'],
-            'user_id' => ['required']
+            'installments_number' => ['nullable', 'integer']
+        ];
+    }
+
+    protected function getUpdateValidation(): array
+    {
+        return [
+            'description' => ['nullable', 'string', 'max:256'],
+            'store_name' => ['nullable', 'string', 'max:256'],
+            'store_id' => ['nullable', 'integer'],
+            'date' => ['nullable', 'date'],
+            'origin_id' => ['nullable', 'integer'],
+            'wallet_id' => ['nullable', 'integer'],
+            'user_id' => ['nullable', 'integer'],
+            'value' => ['nullable'],
+            'is_installments' => ['nullable', 'boolean'],
+            'installments_number' => ['nullable', 'integer'],
         ];
     }
 

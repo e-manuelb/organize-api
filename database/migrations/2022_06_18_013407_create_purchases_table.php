@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->string('description')->nullable();
-            $table->string('store_name')->nullable();
+            $table->string('description', 256)->nullable();
+            $table->string('store_name', 256)->nullable();
             $table->date('date')->nullable();
             $table->float('value');
             $table->foreignId('store_id')->nullable();

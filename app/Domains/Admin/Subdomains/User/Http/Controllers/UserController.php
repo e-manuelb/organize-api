@@ -8,6 +8,7 @@ use App\Domains\Admin\Subdomains\User\Http\Requests\UserRequest;
 use App\Domains\Admin\Subdomains\User\Services\UserService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class UserController extends Controller implements UserControllerInterface
 {
@@ -20,12 +21,14 @@ class UserController extends Controller implements UserControllerInterface
 
     public function create(UserRequest $request): UserResource
     {
-        return new UserResource($this->userService->create($request->all()));
+        return new UserResource($this->userService->create($request->validated()));
     }
 
-    public function index(): UserResource
+    public function index(Request $request): UserResource
     {
-        return new UserResource($this->userService->list());
+        $params = collect($request->only('first_name', 'middle_name', 'last_name', 'email'));
+
+        return new UserResource($this->userService->list($params));
     }
 
     public function show(int $id): UserResource
@@ -35,7 +38,7 @@ class UserController extends Controller implements UserControllerInterface
 
     public function update(UserRequest $request, int $id): UserResource
     {
-        return new UserResource($this->userService->update($request->all(), $id));
+        return new UserResource($this->userService->update($request->validated(), $id));
     }
 
     public function delete(int $id): JsonResponse

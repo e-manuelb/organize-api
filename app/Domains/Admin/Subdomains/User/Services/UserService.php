@@ -6,8 +6,8 @@ use App\Domains\Admin\Subdomains\User\Repositories\Interfaces\UserRepositoryInte
 use App\Domains\Admin\Subdomains\User\Services\Interfaces\UserServiceInterface;
 use App\Domains\Admin\Subdomains\User\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class UserService implements UserServiceInterface
 {
@@ -21,14 +21,18 @@ class UserService implements UserServiceInterface
     public function create(array $data): User
     {
         $data['password'] = Hash::make($data['password']);
-        $data['api_token'] = Str::random(60);
 
         return $this->userRepository->create($data);
     }
 
-    public function list(): Collection
+    public function list(SupportCollection $params): Collection
     {
-        return $this->userRepository->list();
+        return $this->userRepository->list($params);
+    }
+
+    public function paginate(SupportCollection $params)
+    {
+        return $this->userRepository->paginate($params);
     }
 
     public function getByID(int $id): User

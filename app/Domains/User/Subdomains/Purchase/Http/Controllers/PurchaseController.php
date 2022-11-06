@@ -20,7 +20,7 @@ class PurchaseController extends Controller implements PurchaseControllerInterfa
 
     public function create(PurchaseRequest $request): PurchaseResource
     {
-        return new PurchaseResource($this->purchaseService->create($request->all()));
+        return new PurchaseResource($this->purchaseService->create($request->validated()));
     }
 
     public function index(): PurchaseResource
@@ -35,7 +35,7 @@ class PurchaseController extends Controller implements PurchaseControllerInterfa
 
     public function update(PurchaseRequest $request, int $id): PurchaseResource
     {
-        return new PurchaseResource($this->purchaseService->update($request->all(), $id));
+        return new PurchaseResource($this->purchaseService->update($request->validated(), $id));
     }
 
     public function delete(int $id): JsonResponse

@@ -19,11 +19,11 @@ class UserController extends Controller implements UserControllerInterface
 
     public function create(UserRequest $request): UserResource
     {
-        return new UserResource($this->userService->create($request->all()));
+        return new UserResource($this->userService->create($request->validated()));
     }
 
     public function update(UserRequest $request): UserResource
     {
-        return new UserResource($this->userService->update($request->all(), auth()->id()));
+        return new UserResource($this->userService->update($request->validated(), auth()->id()));
     }
 }
