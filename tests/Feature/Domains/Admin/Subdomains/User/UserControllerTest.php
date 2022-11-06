@@ -38,7 +38,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testIndexUsers()
+    public function testIndexUsers(): void
     {
         $admin = $this->createAdmin();
 
@@ -53,7 +53,47 @@ class UserControllerTest extends TestCase
         $this->assertCount($users->count(), $response->json()['data']);
     }
 
-    public function testIndexUsersWithFirstNameFilter()
+    public function testIndexUsersWithUserIdFilter(): void
+    {
+        $admin = $this->createAdmin();
+
+        $users = User::factory(5)->create();
+
+        $query = http_build_query([
+            'user_id' => $users->first()->id
+        ]);
+
+        $response = $this->actingAs($admin)->get("api/admin/users?$query");
+
+        $response->assertOk();
+
+        $this->assertCount(1, $response->json()['data']);
+    }
+
+    public function testIndexUsersWithUserIdFilterInArray(): void
+    {
+        $admin = $this->createAdmin();
+
+        $users = User::factory(30)->create();
+
+        $users->push($admin);
+
+        $ids = collect();
+
+        $users->each(fn($user) => $ids->push($user->id));
+
+        $query = http_build_query([
+            'user_id' => $ids->toArray()
+        ]);
+
+        $response = $this->actingAs($admin)->get("api/admin/users?$query");
+
+        $response->assertOk();
+
+        $this->assertCount($users->count(), $response->json()['data']);
+    }
+
+    public function testIndexUsersWithFirstNameFilter(): void
     {
         $admin = $this->createAdmin();
 
@@ -74,7 +114,7 @@ class UserControllerTest extends TestCase
         $this->assertCount($users->count(), $response->json()['data']);
     }
 
-    public function testIndexUsersWithFirstNameFilterInArray()
+    public function testIndexUsersWithFirstNameFilterInArray(): void
     {
         $admin = $this->createAdmin();
 
@@ -99,7 +139,7 @@ class UserControllerTest extends TestCase
         $this->assertCount($users->count(), $response->json()['data']);
     }
 
-    public function testIndexUsersWithMiddleNameFilter()
+    public function testIndexUsersWithMiddleNameFilter(): void
     {
         $admin = $this->createAdmin();
 
@@ -120,7 +160,7 @@ class UserControllerTest extends TestCase
         $this->assertCount($users->count(), $response->json()['data']);
     }
 
-    public function testIndexUsersWithMiddleNameFilterInArray()
+    public function testIndexUsersWithMiddleNameFilterInArray(): void
     {
         $admin = $this->createAdmin();
 
@@ -145,7 +185,7 @@ class UserControllerTest extends TestCase
         $this->assertCount($users->count(), $response->json()['data']);
     }
 
-    public function testIndexUsersWithLastNameFilter()
+    public function testIndexUsersWithLastNameFilter(): void
     {
         $admin = $this->createAdmin();
 
@@ -166,7 +206,7 @@ class UserControllerTest extends TestCase
         $this->assertCount($users->count(), $response->json()['data']);
     }
 
-    public function testIndexUsersWithLastNameFilterInArray()
+    public function testIndexUsersWithLastNameFilterInArray(): void
     {
         $admin = $this->createAdmin();
 
@@ -191,7 +231,7 @@ class UserControllerTest extends TestCase
         $this->assertCount($users->count(), $response->json()['data']);
     }
 
-    public function testIndexUsersWithEmailFilter()
+    public function testIndexUsersWithEmailFilter(): void
     {
         $admin = $this->createAdmin();
 
@@ -214,7 +254,7 @@ class UserControllerTest extends TestCase
         $this->assertCount(1, $response->json()['data']);
     }
 
-    public function testIndexUsersWithEmailFilterInArray()
+    public function testIndexUsersWithEmailFilterInArray(): void
     {
         $admin = $this->createAdmin();
 
@@ -237,7 +277,7 @@ class UserControllerTest extends TestCase
         $this->assertCount($users->count(), $response->json()['data']);
     }
 
-    public function testIndexUsersWithRoleIdFilter()
+    public function testIndexUsersWithRoleIdFilter(): void
     {
         $admin = $this->createAdmin();
 
@@ -258,7 +298,7 @@ class UserControllerTest extends TestCase
         $this->assertCount($users->count(), $response->json()['data']);
     }
 
-    public function testIndexUsersWithRoleIdFilterInArray()
+    public function testIndexUsersWithRoleIdFilterInArray(): void
     {
         $admin = $this->createAdmin();
 
@@ -285,14 +325,14 @@ class UserControllerTest extends TestCase
         $this->assertCount($users->count(), $response->json()['data']);
     }
 
-    public function testIndexUsersWhenIsNotAdmin()
+    public function testIndexUsersWhenIsNotAdmin(): void
     {
         $response = $this->get('api/admin/users/');
 
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testShowUser()
+    public function testShowUser(): void
     {
         $user = $this->createUser();
         $admin = $this->createAdmin();
@@ -302,7 +342,7 @@ class UserControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testShowUserWhenIsNotAdmin()
+    public function testShowUserWhenIsNotAdmin(): void
     {
         $user = $this->createUser();
 
@@ -311,7 +351,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testUpdateUser()
+    public function testUpdateUser(): void
     {
         $admin = $this->createAdmin();
         $user = $this->createUser();
@@ -336,7 +376,7 @@ class UserControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testUpdateUserWhenIsNotAdmin()
+    public function testUpdateUserWhenIsNotAdmin(): void
     {
         $user = $this->createUser();
 
@@ -351,7 +391,7 @@ class UserControllerTest extends TestCase
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testDeleteUser()
+    public function testDeleteUser(): void
     {
         $admin = $this->createAdmin();
 
@@ -366,7 +406,7 @@ class UserControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testDeleteUserWhenIsNotAdmin()
+    public function testDeleteUserWhenIsNotAdmin(): void
     {
         $user = $this->createUser();
 

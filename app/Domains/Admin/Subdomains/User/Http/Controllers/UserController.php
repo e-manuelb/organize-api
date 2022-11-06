@@ -26,7 +26,7 @@ class UserController extends Controller implements UserControllerInterface
 
     public function index(Request $request): UserResource
     {
-        $params = collect($request->only('first_name', 'middle_name', 'last_name', 'email'));
+        $params = collect($request->only('user_id', 'first_name', 'middle_name', 'last_name', 'email'));
 
         return new UserResource($this->userService->list($params));
     }

@@ -26,10 +26,10 @@ class UserRepository implements UserRepositoryInterface
         return $this
             ->user
             ->when($params->has('user_id'), function ($query) use ($params) {
-                if (is_array($params->value('user_id'))) {
-                    return $query->whereIn('id', $params->value('user_id'));
+                if (is_array($params['user_id'])) {
+                    return $query->whereIn('id', $params['user_id']);
                 } else {
-                    return $query->where('id', $params->value('user_id'));
+                    return $query->where('id', $params['user_id']);
                 }
             })
             ->when($params->has('first_name'), function ($query) use ($params) {
